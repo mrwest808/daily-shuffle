@@ -18,6 +18,7 @@
     event,
   ) => {
     event.preventDefault();
+    if (!presenterName) return;
     $context.presenters = [{ name: presenterName }, ...$context.presenters];
     presenterName = '';
   };
