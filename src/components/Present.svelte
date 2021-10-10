@@ -18,6 +18,7 @@
   let lastUsedGifUrls: string[] = [];
   let currentPresenterIndex = 0;
 
+  $: speakersLeft = presenters.length - currentPresenterIndex - 1;
   $: currentPresenter = presenters[currentPresenterIndex];
   $: nextPresenter = presenters[currentPresenterIndex + 1];
   $: fetchGiphyUrl(wrapItUp);
@@ -102,6 +103,14 @@
           src={giphyUrl}
           alt="a GIF indicating that the speaker is taking too long"
         />
+      {/if}
+      {#if speakersLeft > 0}
+        <div class="absolute bottom-2 right-3">
+          <span class="text-xs text-white text-opacity-40 ml-1.5"
+            >{speakersLeft}
+            {speakersLeft > 1 ? 'speakers' : 'speaker'} left</span
+          >
+        </div>
       {/if}
     </div>
     <div class="text-center">
