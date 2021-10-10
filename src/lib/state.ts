@@ -36,7 +36,7 @@ export function persistContext(context: Context) {
     return;
   }
 
-  window.history.pushState(null, '', `#context=${serialized}`);
+  window.history.pushState(null, '', `#?context=${serialized}`);
 }
 
 export function getDefaultGiphyContext(): Required<Context>['giphy'] {
