@@ -67,7 +67,7 @@
           type="text"
           name="presenter"
           id="presenter"
-          class="h-16 px-4 block w-full text-xl shadow-sm border-black border-opacity-20 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+          class="h-16 px-4 block w-full text-xl shadow-sm border border-black border-opacity-10 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
           placeholder="Enter name..."
           bind:value={presenterName}
         />
@@ -92,7 +92,7 @@
           </div>
           <ul
             role="list"
-            class="divide-y divide-black divide-opacity-20 bg-white rounded-md shadow-sm border-black border-opacity-20"
+            class="divide-y divide-black divide-opacity-20 bg-white rounded-md shadow-sm border border-black border-opacity-10"
           >
             {#each $context.presenters as presenter, index}
               <li class="p-4 flex justify-between">
