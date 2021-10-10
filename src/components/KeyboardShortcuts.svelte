@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
   export enum KeyboardShortcut {
-    nextPlayer = 'n',
-    prevPlayer = 'p',
+    next = 'n',
+    prev = 'p',
     wrapItUp = 't',
     showHelp = 'h',
   }

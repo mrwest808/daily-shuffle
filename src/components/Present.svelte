@@ -18,7 +18,7 @@
   let lastUsedGifUrls: string[] = [];
   let currentPresenterIndex = 0;
 
-  $: speakersLeft = presenters.length - currentPresenterIndex - 1;
+  $: presentersLeft = presenters.length - currentPresenterIndex - 1;
   $: currentPresenter = presenters[currentPresenterIndex];
   $: nextPresenter = presenters[currentPresenterIndex + 1];
   $: fetchGiphyUrl(wrapItUp);
@@ -56,23 +56,23 @@
       wrapItUp = !wrapItUp;
     }
 
-    if (key === KeyboardShortcut.nextPlayer) {
-      nextSpeaker();
+    if (key === KeyboardShortcut.next) {
+      goToNextPresenter();
     }
 
-    if (key === KeyboardShortcut.prevPlayer) {
-      previousSpeaker();
+    if (key === KeyboardShortcut.prev) {
+      goToPreviousPresenter();
     }
   }
 
-  function previousSpeaker() {
+  function goToPreviousPresenter() {
     if (currentPresenterIndex > 0) {
       currentPresenterIndex = currentPresenterIndex - 1;
       resetGetOnWithIt();
     }
   }
 
-  function nextSpeaker() {
+  function goToNextPresenter() {
     if (currentPresenterIndex < presenters.length - 1) {
       currentPresenterIndex = currentPresenterIndex + 1;
       resetGetOnWithIt();
@@ -101,14 +101,14 @@
           in:fade={{ duration: 5000 }}
           class="z-20 w-full absolute bottom-0 left-0 h-full object-cover opacity-75 pointer-events-none"
           src={giphyUrl}
-          alt="a GIF indicating that the speaker is taking too long"
+          alt="a GIF indicating that the presenter is taking too long"
         />
       {/if}
-      {#if speakersLeft > 0}
+      {#if presentersLeft > 0}
         <div class="absolute bottom-2 right-3">
           <span class="text-xs text-white text-opacity-40 ml-1.5"
-            >{speakersLeft}
-            {speakersLeft > 1 ? 'speakers' : 'speaker'} left</span
+            >{presentersLeft}
+            {presentersLeft > 1 ? 'presenters' : 'presenter'} left</span
           >
         </div>
       {/if}
@@ -117,7 +117,7 @@
       {#if nextPresenter}
         <button
           class="text-xl text-black text-opacity-70 transition-transform hover:transform hover:scale-105"
-          on:click={nextSpeaker}
+          on:click={goToNextPresenter}
         >
           Next up: <span class="font-medium text-black"
             >{nextPresenter.name}</span
