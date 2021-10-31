@@ -89,6 +89,10 @@
               <dd>Remind presenter to wrap it up</dd>
             </div>
             <div class="py-2 flex items-center space-x-4">
+              <dt class="flex items-center"><KBD>A</KBD></dt>
+              <dd>Add straggler</dd>
+            </div>
+            <div class="py-2 flex items-center space-x-4">
               <dt class="flex items-center"><KBD>H</KBD></dt>
               <dd>Show this help modal</dd>
             </div>
