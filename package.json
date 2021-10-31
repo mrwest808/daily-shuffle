@@ -28,6 +28,7 @@
     "vite": "^2.6.0"
   },
   "dependencies": {
-    "lz-string": "^1.4.4"
+    "lz-string": "^1.4.4",
+    "mitt": "^3.0.0"
   }
 }

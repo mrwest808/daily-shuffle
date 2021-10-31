@@ -23,6 +23,7 @@
     "baseUrl": ".",
     "allowJs": true,
     "checkJs": true,
+    "noFallthroughCasesInSwitch": true,
     "strict": true,
     "paths": {
       "$assets/*": ["src/assets/*"],

@@ -6,6 +6,7 @@
   import { shuffleArray } from '$lib/utils';
   import Prepare from '$components/Prepare.svelte';
   import Present from '$components/Present.svelte';
+  import KeyboardShortcutListener from './KeyboardShortcutListener.svelte';
 
   const context = createContext();
 
@@ -42,10 +43,12 @@
   }
 </script>
 
-<Layout>
-  {#if state === 'preparing'}
-    <Prepare onStart={handleStart} {context} />
-  {:else}
-    <Present giphy={$context.giphy} presenters={activePresenters} />
-  {/if}
-</Layout>
+<KeyboardShortcutListener>
+  <Layout>
+    {#if state === 'preparing'}
+      <Prepare onStart={handleStart} {context} />
+    {:else}
+      <Present giphy={$context.giphy} presenters={activePresenters} />
+    {/if}
+  </Layout>
+</KeyboardShortcutListener>

@@ -2,12 +2,12 @@
   import { fade } from 'svelte/transition';
   import podium from '$assets/podium.png';
   import { fetchRandomUrl } from '$lib/giphy';
+  import { getKeyboardShortcutContext } from '$lib/keyboard';
   import { Context, getDefaultGiphyContext } from '$lib/state';
   import { getRandomElement } from '$lib/utils';
   import Container from './Container.svelte';
-  import KeyboardShortcuts, {
-    KeyboardShortcut,
-  } from './KeyboardShortcuts.svelte';
+  import KeyboardShortcuts from './KeyboardShortcuts.svelte';
+  import StragglerForm from './StragglerForm.svelte';
   import VerticallyCentered from './VerticallyCentered.svelte';
 
   export let giphy: Required<Context>['giphy'] = getDefaultGiphyContext();
@@ -17,11 +17,31 @@
   let giphyUrl = '';
   let lastUsedGifUrls: string[] = [];
   let currentPresenterIndex = 0;
+  let stragglers: typeof presenters = [];
 
-  $: presentersLeft = presenters.length - currentPresenterIndex - 1;
-  $: currentPresenter = presenters[currentPresenterIndex];
-  $: nextPresenter = presenters[currentPresenterIndex + 1];
+  $: allPresenters = [...presenters, ...stragglers];
+  $: presentersLeft = allPresenters.length - currentPresenterIndex - 1;
+  $: currentPresenter = allPresenters[currentPresenterIndex];
+  $: nextPresenter = allPresenters[currentPresenterIndex + 1];
   $: fetchGiphyUrl(wrapItUp);
+
+  const { onShortcut } = getKeyboardShortcutContext();
+
+  onShortcut('*', (shortcut) => {
+    switch (shortcut) {
+      case 't':
+        wrapItUp = !wrapItUp;
+        break;
+      case 'n':
+      case 'ArrowRight':
+        goToNextPresenter();
+        break;
+      case 'p':
+      case 'ArrowLeft':
+        goToPreviousPresenter();
+        break;
+    }
+  });
 
   async function fetchGiphyUrl(active: boolean) {
     if (!active) {
@@ -49,22 +69,6 @@
     }
   }
 
-  function handleKeyDown(event: KeyboardEvent) {
-    const { key } = event;
-
-    if (key === KeyboardShortcut.wrapItUp) {
-      wrapItUp = !wrapItUp;
-    }
-
-    if (key === KeyboardShortcut.next) {
-      goToNextPresenter();
-    }
-
-    if (key === KeyboardShortcut.prev) {
-      goToPreviousPresenter();
-    }
-  }
-
   function goToPreviousPresenter() {
     if (currentPresenterIndex > 0) {
       currentPresenterIndex = currentPresenterIndex - 1;
@@ -73,7 +77,7 @@
   }
 
   function goToNextPresenter() {
-    if (currentPresenterIndex < presenters.length - 1) {
+    if (currentPresenterIndex < allPresenters.length - 1) {
       currentPresenterIndex = currentPresenterIndex + 1;
       resetGetOnWithIt();
     }
@@ -84,9 +88,11 @@
       wrapItUp = false;
     }
   }
-</script>
 
-<svelte:window on:keydown={handleKeyDown} />
+  function addStraggler(straggler: { name: string }) {
+    stragglers = [...stragglers, straggler];
+  }
+</script>
 
 <VerticallyCentered>
   <Container class="space-y-8">
@@ -132,6 +138,7 @@
   </Container>
 </VerticallyCentered>
 
+<StragglerForm onAddStraggler={addStraggler} />
 <KeyboardShortcuts />
 
 <style>

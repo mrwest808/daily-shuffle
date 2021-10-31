@@ -1,49 +1,30 @@
-<script lang="ts" context="module">
-  export enum KeyboardShortcut {
-    next = 'n',
-    prev = 'p',
-    wrapItUp = 't',
-    showHelp = 'h',
-  }
-
-  export namespace KeyboardShortcut {
-    export const rawValues: string[] = Object.values(
-      KeyboardShortcut,
-    ) as string[];
-  }
-</script>
-
 <script lang="ts">
+  import { getKeyboardShortcutContext } from '$lib/keyboard';
+
   import { expoOut } from 'svelte/easing';
   import { fade, fly } from 'svelte/transition';
   import KBD from './KBD.svelte';
 
   let isOpen = false;
 
+  const { onShortcut } = getKeyboardShortcutContext();
+
+  onShortcut('*', (shortcut) => {
+    switch (shortcut) {
+      case 'h':
+        toggleOpen();
+        break;
+      default:
+        if (isOpen) {
+          toggleOpen();
+        }
+    }
+  });
+
   function toggleOpen() {
     isOpen = !isOpen;
   }
-
-  const handleKeyDown: svelte.JSX.KeyboardEventHandler<Window> = (event) => {
-    if (event.key === KeyboardShortcut.showHelp) {
-      toggleOpen();
-    }
-
-    if (
-      isOpen &&
-      event.key !== KeyboardShortcut.showHelp &&
-      KeyboardShortcut.rawValues.includes(event.key)
-    ) {
-      toggleOpen();
-    }
-
-    if (isOpen && event.key === 'Escape') {
-      toggleOpen();
-    }
-  };
 </script>
-
-<svelte:window on:keydown={handleKeyDown} />
 
 <button
   class="fixed bottom-4 right-4 text-black text-opacity-60 hover:text-opacity-100 focus:text-opacity-100"

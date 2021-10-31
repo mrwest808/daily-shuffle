@@ -8,6 +8,7 @@ specifiers:
   autoprefixer: ^10.3.6
   cssnano: ^5.0.8
   lz-string: ^1.4.4
+  mitt: ^3.0.0
   postcss: ^8.3.8
   postcss-load-config: ^3.1.0
   prettier: ^2.4.1
@@ -22,6 +23,7 @@ specifiers:
 
 dependencies:
   lz-string: 1.4.4
+  mitt: 3.0.0
 
 devDependencies:
   '@sveltejs/vite-plugin-svelte': 1.0.0-next.26_svelte@3.43.1+vite@2.6.2
@@ -1060,6 +1062,10 @@ packages:
   /minimist/1.2.5:
     resolution: {integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==}
     dev: true
+
+  /mitt/3.0.0:
+    resolution: {integrity: sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==}
+    dev: false
 
   /mkdirp/0.5.5:
     resolution: {integrity: sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==}
