@@ -52,6 +52,7 @@
         event.key as KeyboardShortcut,
         event.key as KeyboardShortcut,
       );
+      event.stopPropagation();
     }
   }
 </script>

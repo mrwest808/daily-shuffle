@@ -34,7 +34,7 @@
     $keyboardShortcutsEnabled = false;
     setTimeout(() => {
       container.querySelector('input')?.focus();
-    }, 75); // Avoid the shortcut letter ending up in the input (งツ)ว
+    }, 0);
   };
 
   const stopEditing = () => {
