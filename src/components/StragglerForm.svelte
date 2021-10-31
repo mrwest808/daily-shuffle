@@ -75,7 +75,10 @@
 
 <div bind:this={container} class="fixed bottom-4 left-4 flex">
   {#if !editing}
-    <button class="text-black text-opacity-60" on:click={toggleEditing}>
+    <button
+      class="text-black text-opacity-60 hover:text-opacity-100 focus:text-opacity-100"
+      on:click={toggleEditing}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
