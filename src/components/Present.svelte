@@ -143,6 +143,7 @@
 
 <style>
   [data-stage] {
+    background-color: black;
     background-image: url(/stage.png);
     background-position: center;
     background-repeat: no-repeat;
